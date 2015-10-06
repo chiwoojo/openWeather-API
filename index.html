@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>temperature!</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-  <style>
-    a {
-      margin: 5%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>temperature!</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Font Awesome (for icons) CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Main stylesheet CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 
-  <nav>
-    <!--     
-    <a href="" id="seattle">Seattle</a>
-    <a href="" id="dallas">Dallas</a>
-    <a href="" id="seoul">Seoul</a> 
-    -->
-  </nav>
+    <nav>
 
-  <div class="navbar">
-    <ul class="nav nav-justified" id="centeredNav">
-      <!-- 
-      <li><a href="#">Home</a></li> 
-      -->
-    </ul>
-  </div>
+    </nav>
+    
+    <!-- Navigation -->
+    <div class="navbar navbar-default navbar-static-top transparent">
+        <div class="container">
+            
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">
+                    <i class="fa fa-sun-o"></i> 
+                    WEATHER<span style="font-weight: 700"> OK</span>
+                </a>
+            </div>
 
-  <br>
-  
-  <div id="container">
 
-  </div>
+            
 
-  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-  <script>
+            <ul class="nav nav-justified" id="centeredNav">
+            </ul>
+        </div>
+    </div>
+
+<br>
+
+<div id="container">
+    
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script>
 
    //below is an array of Cities that I want to display on the page. 
    var cities = ["Seattle","Houston","Dallas", "Seoul"];
 
    //below function appends all the information
    var to_be_run_on_server_response = function(weather_data) {
-     $('#container').append($('<div id="current-temp" class="text-center">').text("Current temperature in "+weather_data.name+" is: " + weather_data.main.temp));
-     $('#container').append($('<div id="high" class="text-center">').text("High of today is: " +weather_data.main.temp_max));
-     $('#container').append($('<div id="low" class="text-center">').text("Low of today is : " + weather_data.main.temp_min));
-     $('#container').append($('<div id="conditions" class="text-center">').text("Condition for today is : " + weather_data.weather[0].main));
-     $('#container').append($('<div id="wind-speed" class="text-center">').text("Wind speed for today is : " + weather_data.wind.speed + " MPH"));
-     $('#container').append($('<div id="sunrise" class="text-center">').text(new Date(weather_data.sys.sunrise*1000)+" is Sunrise :)"));
-     $('#container').append($('<div id="sunset" class="text-center">').text(new Date(weather_data.sys.sunset*1000)+" is Sunset :)"));
+       $('#container').append($('<div id="current-temp" class="text-center animation-text">').text(weather_data.main.temp));
+
+       var conditions = weather_data.weather[0].main;
+       $('#container').append($('<div id="conditions" class="text-center animation-text">').text(conditions));
+       $('#container').append($('<div id="high" class="text-center animation-text">').text("High of today is: " +weather_data.main.temp_max));
+       $('#container').append($('<div id="low" class="text-center animation-text">').text("Low of today is : " + weather_data.main.temp_min));
+       $('#container').append($('<div id="wind-speed" class="text-center animation-text">').text("Wind speed for today is : " + weather_data.wind.speed + " MPH"));
+       $('#container').append($('<div id="sunrise" class="text-center animation-text">').text(new Date(weather_data.sys.sunrise*1000)+" is Sunrise :)"));
+       $('#container').append($('<div id="sunset" class="text-center animation-text">').text(new Date(weather_data.sys.sunset*1000)+" is Sunset :)"));
    }
 
    //below function appends HTML elements for all the elements in the array 
@@ -58,8 +77,8 @@
      for (var i=0; i<arr.length; i++) {
        //for each index in the array, make an HTML anchor element with id="[name of city]"
        $('#centeredNav').append($('<li>').append($('<a href="#" id="'+arr[i]+'"></a>').text(arr[i])));
-     }
    }
+}
 
    //call make_cities_anchors to make the anchor tags
    make_cities_anchors(cities);
@@ -69,11 +88,11 @@
 
    //this code waits for the click on an 'a' element, then prevents it from reloading the webpage, and it empties out the contents of the page, then alerts the user, then get the API information to fill out based on the 'a' element's id attribute ($(this).attr('id')).
    $('a').click(function(event) {
-     event.preventDefault();
-     $('#container').empty();
+       event.preventDefault();
+       $('#container').empty();
      //alert("Weather is currently getting fetched....");
      $.get('http://api.openweathermap.org/data/2.5/weather?q='+$(this).attr('id')+'&mode=json&units=imperial').success(to_be_run_on_server_response);
-   });
+ });
 
 
 /*   
@@ -88,7 +107,6 @@
 
 
 
-
-  </script>
+</script>
 </body>
 </html>
