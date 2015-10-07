@@ -1,3 +1,7 @@
+
+/**
+ *    Full HTML background
+ */
 body {
     /* location of image */
     background-image: url(../img/endless_road.jpg);
@@ -27,22 +31,22 @@ body {
  *    Source: http://stackoverflow.com/questions/16392952/css-to-make-bootstrap-navbar-transparent
  *    
  */
-.navbar.transparent {
-    border-width: 0px;
-    -webkit-box-shadow: 0px 0px;
-    box-shadow: 0px 0px;
-    background-color: rgba(0,0,0,0.0);
-    background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
-    background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-    background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
-}
+ .navbar.transparent {
+     border-width: 0px;
+     -webkit-box-shadow: 0px 0px;
+     box-shadow: 0px 0px;
+     background-color: rgba(0,0,0,0.0);
+     background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+     background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+ }
 
 /**
- *     Text for Navbar
+ *     Navigation text family
  */
-.navbar {
-    font-family: 'Montserrat', sans-serif;
-}
+ .navbar {
+     font-family: 'Montserrat', sans-serif;
+ }
 
 /**
  *     Adding animation
@@ -50,34 +54,34 @@ body {
  *     source: http://stackoverflow.com/questions/17322305/css3-animations-fade-in-as-move-down
  *     
  */
-.animation-text {
-    position:relative;
-    animation:mymove 3s ease-out forwards;
-    animation-fill-mode: forwards;
-    /*animation-iteration-count:3;*/
+ .animation-text {
+     position:relative;
+     animation:mymove 3s ease-out forwards;
+     animation-fill-mode: forwards;
+     /*animation-iteration-count:3;*/
 
-    /* Safari and Chrome */
-    -webkit-animation:mymove 3s;
-    -webkit-animation-fill-mode:forwards;
-    /*-webkit-animation-iteration-count:3;*/
-}
+     /* Safari and Chrome */
+     -webkit-animation:mymove 3s;
+     -webkit-animation-fill-mode:forwards;
+     /*-webkit-animation-iteration-count:3;*/
+ }
 
-@keyframes mymove
-{ 
-from {top:0px; opacity: 0;}
-to {top:85px; opacity: 1}
-}
+ @keyframes mymove
+ { 
+     from {top:0px; opacity: 0;}
+     to {top:85px; opacity: 1}
+ }
 
-@-webkit-keyframes mymove /* Safari and Chrome */
-{
-from {top:0px; opacity: 0;}
-to {top:85px; opacity: 1;}
-}
+ @-webkit-keyframes mymove /* Safari and Chrome */
+ {
+     from {top:0px; opacity: 0;}
+     to {top:85px; opacity: 1;}
+ }
 
 
 /**
- *    Styling for current temperature
- */
+*    Styling for content
+*/
 #current-temp {
     font-family: 'Montserrat', sans-serif;
     font-size: 5em;
@@ -92,5 +96,65 @@ to {top:85px; opacity: 1;}
     border-top: 0px;
     padding-top: 0px;
     height: 60px;
+}
+
+.animation-text {
+    font-family: 'Pacifico', cursive;
+}
+
+.animation-text {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/**
+*    Underline from left copied and pasted from Hover.css
+*    
+*/
+.hvr-underline-from-left {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow: hidden;
+}
+.hvr-underline-from-left:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: #4BF2F2;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {
+    right: 0;
+}
+
+/**
+ *    Added this very specific hover and focus 
+ *    to made sure that the text is turning blue when hovered over a city
+ */
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover 
+{
+    color: #4BF2F2;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #191919;
 }
 
