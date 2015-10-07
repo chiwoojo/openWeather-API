@@ -2,7 +2,7 @@
 
 >Check out the weather in different locations!
 
-![open-weather-map API app img](https://cloud.githubusercontent.com/assets/13400593/9979050/fc0c3aa4-5f09-11e5-86e5-9bf5778e2943.png)
+![screen shot 2015-10-07 at 3 10 18 pm](https://cloud.githubusercontent.com/assets/13400593/10352694/a9545814-6d05-11e5-9105-5d474802b9a7.png)
 
 Using openWeatherMap's API, I created this single page app to show current weather information in 4 different cities. 
 
