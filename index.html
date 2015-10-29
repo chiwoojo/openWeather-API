@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    <!-- Corrections for Android devices. Found on: http://stackoverflow.com/questions/12021794/android-browser-ignores-responsive-web-design -->
+    <meta content="True" name="HandheldFriendly">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width">
+
     <title>weatherOK</title>
 
     <!-- Bootstrap CDN -->
@@ -15,6 +21,8 @@
 
     <!-- Main stylesheet CSS -->
     <link rel="stylesheet" href="css/main.css">
+    
+    
 
 </head>
 <body>
@@ -35,11 +43,10 @@
                 </a>
             </div>
 
-
-            
-
             <ul class="nav navbar-nav navbar-right" id="centeredNav">
+            <!--     JS appends nav elements here      -->
             </ul>
+            
         </div>
     </div>
 
@@ -51,98 +58,10 @@
 
 
 
-
+<!-- below: jquery cdn -->
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script>
 
-   //below is an array of Cities that I want to display on the page. 
-   var cities = ["Seattle", "Houston", "Dallas", "Paris"];
-
-   //below function appends all the information into HTML
-   var to_be_run_on_server_response = function(weather_data) {
-       $('#container').append($('<div id="current-temp" class="text-center animation-text">').text(weather_data.main.temp));
-
-       /**
-        *    Animation for number going from 0 to temp.
-        *
-        *    source: http://www.i-visionblog.com/2014/11/jquery-animated-number-counter-from-zero-to-value-jquery-animation.html
-        *    
-        */
-       $('#current-temp').each(function () {
-           $(this).prop('Counter',0).animate({
-               Counter: $(this).text()
-           }, {
-               duration: 700,
-               easing: 'swing',
-               step: function (now) {
-                   $(this).text(now.toFixed(2));
-               }
-           });
-       });
-
-       /**
-        *    Turns new Date() object into a AM/PM format
-        *    @param  {date} date date Object
-        *    @return {string}      string that is formatted like "7:12 PM"
-        */
-       function formatAMPM(date) {
-         var hours = date.getHours();
-         var minutes = date.getMinutes();
-         var ampm = hours >= 12 ? 'PM' : 'AM';
-         hours = hours % 12;
-         hours = hours ? hours : 12; // the hour '0' should be '12'
-         minutes = minutes < 10 ? '0'+minutes : minutes;
-         var strTime = hours + ':' + minutes + ' ' + ampm;
-         return strTime;
-       }
-
-       var conditions = weather_data.weather[0].main;
-       $('#container').append($('<div id="conditions" class="text-center animation-text">').text(conditions));
-       $('#container').append($('<div id="high" class="text-center animation-text">').text("HIGH " +weather_data.main.temp_max));
-       $('#container').append($('<div id="low" class="text-center animation-text">').text("LOW " + weather_data.main.temp_min));
-       $('#container').append($('<div id="wind-speed" class="text-center animation-text">').text("WIND SPEED " + weather_data.wind.speed + " MPH"));
-       $('#container').append($('<div id="sunrise" class="text-center animation-text">').text("SUNRISE "+formatAMPM(new Date(weather_data.sys.sunrise*1000)) + " PST"));
-       $('#container').append($('<div id="sunset" class="text-center animation-text">').text("SUNSET "+formatAMPM(new Date(weather_data.sys.sunset*1000)) +" PST"));
-   }
-
-   //below function appends HTML elements for all the elements in the array 
-   //take a parameter that's an array (i.e. 'cities' arr)
-   var make_cities_anchors = function(arr) {
-     //loops through the array
-     for (var i=0; i<arr.length; i++) {
-       //for each index in the array, make an HTML anchor element with id="[name of city]"
-       //also adds hvr-underline-from-left hover effect downloaded from Hover.css
-       $('#centeredNav').append($('<li>').append($('<a href="#" class="text-center hvr-underline-from-left" id="'+arr[i]+'"></a>').text(arr[i])));
-   }
-}
-
-   //call make_cities_anchors to make the anchor tags
-   make_cities_anchors(cities);
-
-   //this retrieves data and if successfull, runs the to_be_run_on_server_response
-   $.get('http://api.openweathermap.org/data/2.5/weather?q=seattle&mode=json&units=imperial').success(to_be_run_on_server_response);
-
-   //this code waits for the click on an 'a' element, then prevents it from reloading the webpage, and it empties out the contents of the page, then alerts the user, then get the API information to fill out based on the 'a' element's id attribute ($(this).attr('id')).
-   $('a').click(function(event) {
-       event.preventDefault();
-       $('#container').empty();
-     //alert("Weather is currently getting fetched....");
-     $.get('http://api.openweathermap.org/data/2.5/weather?q='+$(this).attr('id')+'&mode=json&units=imperial').success(to_be_run_on_server_response);
- });
-
-
-/*   
-   $('#dallas').click(function(event) {
-     event.preventDefault();
-     $('#container').empty();
-     alert("Weather is currently getting fetched....");
-     $.get('http://api.openweathermap.org/data/2.5/weather?q=dallas&mode=json&units=imperial').success(to_be_run_on_server_response);
-   });
-//code not needed anymore due to refractoring.
-*/
-
-
-
-</script>
+<!-- below: Main JS -->
+<script type="text/javascript" src="main.js" asyn></script>
 </body>
 </html>
